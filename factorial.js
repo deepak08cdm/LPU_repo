@@ -3,7 +3,7 @@ function main(n){
     for (let i=1;i<=n;i++){
         f= f*i
     }
-    console.log(f)
+    console.log("factorial of number = "+f)
 }
 
 
