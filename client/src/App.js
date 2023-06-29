@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Routes, Route} from 'react-router-dom'
 import Navbar from './Components/Navbar';
+import { useSelector } from 'react-redux';
 
 function App() {
   const [makeCall, setMakeCall] = useState(true)
@@ -17,6 +18,8 @@ function App() {
     setMakeCall(false)
     setData(result)
   }
+  const reduxState = useSelector((state)=>state)
+  console.log(reduxState, 'redux state')
   const needToMakeCall = ()=>{setMakeCall(true)}
   useEffect(() => {
     if (makeCall) {

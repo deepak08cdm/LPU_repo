@@ -10,9 +10,12 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function MainTable(props) {
     const navigate = useNavigate()
+    const reduxState = useSelector((state)=>state)
+    console.log(reduxState, 'redux state')
     const deleteRow = async(id)=>{
         try{
             const res = await axios.delete('http://localhost:3001/users/'+id)
@@ -37,7 +40,7 @@ function MainTable(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.data.map((row) => (
+                        {reduxState.user.map((row) => (
                             <TableRow
                                 key={row.name}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -65,6 +68,8 @@ function MainTable(props) {
 }
 
 export default MainTable
+
+//props drilling :- when we need to transfer data from component A to component D btw B&C component recieve data unnessorily 
 
 
 

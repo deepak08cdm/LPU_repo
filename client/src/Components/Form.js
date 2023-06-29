@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../Redux/reducer";
 
 function Form(props) {
 
@@ -10,6 +12,7 @@ function Form(props) {
     const params = useParams()
     const navigate = useNavigate()
     const pattern = /edit/g
+    const dispatch = useDispatch()
 
     const handleClick = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -18,6 +21,9 @@ function Form(props) {
     const clearData = () => {
         console.log('clearData called')
         setFormData({name:'',email:'',id:''})
+    }
+    const addDataToRedux = ()=>{
+        dispatch(addUser(formData))
     }
     const addData = async () => {
         try {
@@ -72,7 +78,7 @@ function Form(props) {
                     <label htmlFor="id">ID: </label>
                     <input type='text' value={formData.id} name='id' onChange={(e) => { handleClick(e) }} />
                     <br />
-                    <input type="button" value='Add user' onClick={addData} />
+                    <input type="button" value='Add user' onClick={addDataToRedux} />
                     <input type='button' value='Clear' onClick={clearData} />
                 </form>
             </div>
